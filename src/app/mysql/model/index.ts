@@ -20,7 +20,7 @@ var db: any = {};
 db.sequelize = Sequelize;
 db.sequelizeConfig = sequelizeConfig;
 // db.tutorial = require("./tutorial.ts")(sequelizeConfig, Sequelize);
-db.slack = require("./slack.ts")(sequelizeConfig, Sequelize);
+db.slack = require("./slack")(sequelizeConfig, Sequelize);
 
 module.exports = db;
 

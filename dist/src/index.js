@@ -1,4 +1,4 @@
-
+"use strict";
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -13,11 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // RESTful API route for DB 
 app.use('/', require('./app/mysql/route/route'));
 // DB Connection 
-
 const db2 = require('./app/mysql/model');
 db2.sequelizeConfig.sync();
 // Default route for server status 
-app.get('/', (req: any, res: { json: (arg0: { message: string; }) => void; }) => { res.json({ message: `Server is running on port ${PORT}` }); });
+app.get('/', (req, res) => { res.json({ message: `Server is running on port ${PORT}` }); });
 // Set listen port for request 
 app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`); });
-
+//# sourceMappingURL=index.js.map
