@@ -10,6 +10,6 @@ router.put('/api/tutorial/:id', tutorialController_1.default.update); // Delete 
 router.delete('/api/tutorial/:id', tutorialController_1.default.delete);
 router.post('/api/slack/workStart/:userId', slackController_1.default.create);
 router.post('/api/slack/workEnd/:id', slackController_1.default.update);
-router.
-    module.exports = router;
+// router.
+module.exports = router;
 //# sourceMappingURL=route.js.map
