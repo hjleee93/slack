@@ -10,8 +10,10 @@ router.delete('/api/tutorial/:id', tutorialController.delete);
 
 
 
-router.post('/api/slack/workStart', slackController.create);
+router.post('/api/slack/workStart/:userId', slackController.create);
 router.post('/api/slack/workEnd/:id', slackController.update);
+
+router.
 
 
 
