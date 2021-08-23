@@ -18,7 +18,7 @@ const db2 = require('./app/mysql/model');
 db2.sequelizeConfig.sync();
 // Default route for server status 
 app.get('/', (req: any, res: any) =>{
-    res.sendFile(__dirname + '/add_to_slack.html')  });
+    res.sendFile( './add_to_slack.html')  });
 
 // Set listen port for request 
 app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`); });
