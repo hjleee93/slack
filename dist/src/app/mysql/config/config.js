@@ -1,8 +1,8 @@
 "use strict";
 module.exports = {
-    host: "ao9moanwus0rjiex.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    username: "hvc6qu9s7g7m9gcl:ahlzzxi08jucurwx",
-    password: "ahlzzxi08jucurwx",
+    host: "klbcedmmqp7w17ik.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    username: "ffgg0ksx91tiu3ko",
+    password: "urxvi7kgsn8vicyw",
     db: "test",
     dialect: "mariadb",
     timezone: '+09:00',
