@@ -5,6 +5,8 @@ const Op = db.sequelize.Op;
 
 // Create tutorial 
 class tutorialController {
+
+
     create = (req: any, res: any) => {
         // Validate request 
         if (!req.body.title) { res.status(400).send({ message: 'Title is empty!' }); return; }
