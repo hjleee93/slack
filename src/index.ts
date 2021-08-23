@@ -25,9 +25,10 @@ app.get('/', (req: any, res: any) => {
 });
 
 app.get('/auth', function(req: any, res:any){
-
+    console.debug('req', req.query)
+    console.debug('res', res)
     if (!req.query.code) { // access denied
-        console.debug('req', req.query)
+
         return;
     }
     let data = {form: {
