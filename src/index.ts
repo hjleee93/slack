@@ -17,8 +17,11 @@ app.use('/', require('./app/mysql/route/route'));
 const db2 = require('./app/mysql/model');
 db2.sequelizeConfig.sync();
 // Default route for server status 
-app.get('/', (req: any, res: any) =>{
-    res.sendFile( './add_to_slack.html')  });
+app.get('/', (req: any, res: any) => {
+    res.send('<a href="https://slack.com/oauth/authorize?scope=commands+team%3Aread&client_id=2409863706817.2400580632678">\n' +
+        '    <img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" />\n' +
+        '</a>')
+});
 
 // Set listen port for request 
 app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`); });
