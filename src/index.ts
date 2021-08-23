@@ -17,12 +17,9 @@ app.use('/', require('./app/mysql/route/route'));
 const db2 = require('./app/mysql/model');
 db2.sequelizeConfig.sync();
 // Default route for server status 
-app.get('/', (req: any, res: { json: (arg0: { message: string; }) => void; }) =>
-{ res.json({ message: `Server is running on port ${PORT}` });  });
+app.get('/', (req: any, res: any) =>{
+    res.sendFile(__dirname + '/add_to_slack.html')  });
 
-app.get('/auth', (req: any, res:any) =>{
-    res.sendFile(__dirname + '/add_to_slack.html')
-})
 // Set listen port for request 
 app.listen(PORT, () => { console.log(`Server is running on port ${PORT}`); });
 
