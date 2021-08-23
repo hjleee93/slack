@@ -13,7 +13,7 @@ router.delete('/api/tutorial/:id', tutorialController.delete);
 router.post('/api/slack/workStart', slackController.create);
 router.post('/api/slack/workEnd', slackController.update);
 
-router.get('/api/slack/workEnd/api/slack/getCode', slackController.update);
+router.get('/api/slack/getCode', slackController.update);
 
 // router.
 
