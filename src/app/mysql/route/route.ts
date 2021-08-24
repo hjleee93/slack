@@ -7,32 +7,9 @@ import slackController from '../controller/slackController';
 import tutorialController from '../controller/tutorialController'; // Create tutorial
 
 
-// const token = router.get('/auth', (req: any, res: any, next: NextFunction) => {
-export const userInfo = (req: any, res: any, next: any) => {
-    console.log(req.body)
+router.get('/auth', (req: any, res: any, next: any) => {
 
-    //     .then(() => {
-    //     fetch(userIdentityUrl, {
-    //         method: 'get',
-    //         headers: {
-    //             Authorization: `Bearer ${access_token}`,
-    //         }
-    //     })
-    //         .then((response: any) => {
-    //             response.json();
-    //         })
-    //         .then((json: any) => {
-    //
-    //             console.log('user', json)
-    //             // res.send(json)
-    //         });
-    // });
-    next();
-
-};
-
-const token1 = router.get('/auth', (req: any, res: any, next: any) => {
-    console.log('token1')
+    console.log('token1', req.query.code)
     if (!req.query.code) {
         //error
         res.send(new Error('no code'));
@@ -48,9 +25,23 @@ const token1 = router.get('/auth', (req: any, res: any, next: any) => {
         .then((json: any) => {
             access_token = json.access_token
             console.log('token', access_token)
-            // res.send(json)
+            res.send(json)
         })
-    next();
+        .then(()=>{
+            fetch(userIdentityUrl, {
+                method: 'get',
+                headers: {
+                    Authorization: `Bearer ${access_token}`,
+                }
+            })
+                .then((response: any) => {
+                    response.json();
+                })
+                .then((json: any) => {
+                    console.log('user', json)
+                    // res.send(json)
+                });
+        })
 });
 
 router.post('/api/tutorial', tutorialController.create); // Retrieve all tutorials 
@@ -60,10 +51,11 @@ router.put('/api/tutorial/:id', tutorialController.update); // Delete tutorial b
 router.delete('/api/tutorial/:id', tutorialController.delete);
 
 
-router.post('/api/slack/workStart', slackController.create);
-router.post('/api/slack/workEnd', slackController.update);
+router.post('/api/slack/workStart', slackController.workStart);
+router.post('/api/slack/workEnd', slackController.workEnd);
+router.post('/api/slack/workAnalytics', slackController.findHistory)
 
-router.get('/api/slack/getCode', userInfo, slackController.update);
+// router.get('/api/slack/getCode', userInfo, slackController.update);
 
 
 module.exports = router;
