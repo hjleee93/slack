@@ -4,8 +4,6 @@ const router = require('express').Router();
 const fetch = require('node-fetch');
 
 import slackController from '../controller/slackController';
-import tutorialController from '../controller/tutorialController'; // Create tutorial
-
 
 router.get('/auth', (req: any, res: any, next: any) => {
 
@@ -27,7 +25,7 @@ router.get('/auth', (req: any, res: any, next: any) => {
             console.log('token', access_token)
             res.send(json)
         })
-        .then(()=>{
+        .then(() => {
             fetch(userIdentityUrl, {
                 method: 'get',
                 headers: {
@@ -44,15 +42,10 @@ router.get('/auth', (req: any, res: any, next: any) => {
         })
 });
 
-router.post('/api/tutorial', tutorialController.create); // Retrieve all tutorials 
-router.get('/api/tutorial', tutorialController.findAll); // Retrieve tutorial by id 
-router.get('/api/tutorial/:id', tutorialController.findOne); // Update tutorial by id 
-router.put('/api/tutorial/:id', tutorialController.update); // Delete tutorial by id 
-router.delete('/api/tutorial/:id', tutorialController.delete);
-
 
 router.post('/api/slack/workStart', slackController.workStart);
 router.post('/api/slack/workEnd', slackController.workEnd);
+router.post('/api/slack/openDatePicker', slackController.openCalender)
 router.post('/api/slack/workAnalytics', slackController.findHistory)
 
 // router.get('/api/slack/getCode', userInfo, slackController.update);
