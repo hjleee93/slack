@@ -12,9 +12,11 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@slack/bolt": "^3.6.0",
     "@slack/oauth": "^2.2.0",
     "@slack/web-api": "^6.4.0",
     "@types/lodash": "^4.14.172",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -27,6 +29,8 @@
     "mysql2": "^2.3.0",
     "node-fetch": "^2.6.1",
     "node-static": "^0.7.11",
+    "qs": "^6.10.1",
+    "qs-stringify": "^1.2.1",
     "request": "^2.88.2",
     "sequelize": "^6.6.5",
     "socket.io": "^4.1.3"

@@ -1,9 +1,21 @@
-import {request} from "express";
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
+const { App } = require('@slack/bolt');
+const appSlack = new App({
+    signingSecret: '564d1cf10f1afffb22dd6db94f6b6875',
+    token: 'xoxb-2409863706817-2407536745683-AfrEWCjdEw3ejwZxQtFwVEDr',
+});
+
+(async () => {
+    // Start the app
+    await appSlack.start(process.env.PORT || 3000);
+
+    console.log('⚡️ Bolt app is running!');
+})();
+
+
 const PORT = process.env.PORT || 8000;
 // Set CORS option 
 app.use(cors());

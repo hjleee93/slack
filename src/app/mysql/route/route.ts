@@ -4,6 +4,7 @@ const router = require('express').Router();
 const fetch = require('node-fetch');
 
 import slackController from '../controller/slackController';
+import meetingController from '../controller/meetingController'
 
 router.get('/auth', (req: any, res: any, next: any) => {
 
@@ -43,10 +44,16 @@ router.get('/auth', (req: any, res: any, next: any) => {
 });
 
 
+router.post('/api/slack', slackController.basicApi);
 router.post('/api/slack/workStart', slackController.workStart);
 router.post('/api/slack/workEnd', slackController.workEnd);
 router.post('/api/slack/openDatePicker', slackController.openCalender)
 router.post('/api/slack/workAnalytics', slackController.findHistory)
+
+router.post('/api/slack/meeting/book', meetingController.booking)
+
+router.post('/slack/events',meetingController.event)
+router.post('/slack/actions', meetingController.actions)
 
 // router.get('/api/slack/getCode', userInfo, slackController.update);
 

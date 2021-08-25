@@ -2,7 +2,7 @@ module.exports = {
   host: "localhost",
   username: "hj",
   password: "Hjleee93@",
-  db: "zempie",
+  db: "slack_test",
   dialect: "mariadb",
 
 

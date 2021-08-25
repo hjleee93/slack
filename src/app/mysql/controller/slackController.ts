@@ -6,12 +6,16 @@ import fetch from "node-fetch"
 
 const db = require('../model')
 
-const Slack = db.slack;
 const SlackUser = db.slackUser;
 const WorkLog = db.workLog;
 const Op = db.sequelize.Op;
 
 class slackController {
+    basicApi= async (req: any, res: any) => {
+        console.log(req)
+
+        res.send();
+    }
 
     workStart = async (req: any, res: any) => {
 
@@ -60,25 +64,64 @@ class slackController {
     };
 
 
-    findAll = (req: any, res: any) => {
-        // const title = req.query.title;
-        let condition = {where: {}};
-
-        // if (keyword) {
-        //     condition = { where: { [Op.or]: [{ title: { [Op.like]: `%${keyword}%` } }, { description: { [Op.like]: `%${keyword}%` } }] } }
-        // };
-        Slack.findAll(condition)
-            .then((data: any) => {
-                res.send(data);
-            })
-            .catch((err: { message: any; }) => {
-                res.status(500).send({message: err.message || 'Retrieve all slack failure.'});
-            });
-    };
+    // findAll = (req: any, res: any) => {
+    //     // const title = req.query.title;
+    //     let condition = {where: {}};
+    //
+    //     // if (keyword) {
+    //     //     condition = { where: { [Op.or]: [{ title: { [Op.like]: `%${keyword}%` } }, { description: { [Op.like]: `%${keyword}%` } }] } }
+    //     // };
+    //     Slack.findAll(condition)
+    //         .then((data: any) => {
+    //             res.send(data);
+    //         })
+    //         .catch((err: { message: any; }) => {
+    //             res.status(500).send({message: err.message || 'Retrieve all slack failure.'});
+    //         });
+    // };
 
     openCalender = async (req:any, res:any)=>{
+
         const body={
+            "title": {
+                "type": "plain_text",
+                "text": "Add info to feedback",
+                "emoji": true
+            },
+            "submit": {
+                "type": "plain_text",
+                "text": "Save",
+                "emoji": true
+            },
+            "type": "modal",
             "blocks": [
+                {
+                    "type": "input",
+                    "element": {
+                        "type": "plain_text_input"
+                    },
+                    "label": {
+                        "type": "plain_text",
+                        "text": "Label",
+                        "emoji": true
+                    }
+                },
+                {
+                    "type": "section",
+                    "text": {
+                        "type": "mrkdwn",
+                        "text": "Test block with multi conversations select"
+                    },
+                    "accessory": {
+                        "type": "multi_conversations_select",
+                        "placeholder": {
+                            "type": "plain_text",
+                            "text": "Select conversations",
+                            "emoji": true
+                        },
+                        "action_id": "multi_conversations_select-action"
+                    }
+                },
                 {
                     "type": "section",
                     "text": {
@@ -95,61 +138,10 @@ class slackController {
                         },
                         "action_id": "datepicker-action"
                     }
-                },
-                {
-                    "type": "section",
-                    "text": {
-                        "type": "plain_text",
-                        "text": "근태확인 할 날짜를 선택하세요",
-                        "emoji": true
-                    }
-                },
-                {
-                    "type": "actions",
-                    "elements": [
-                        {
-                            "type": "datepicker",
-                            "initial_date":moment().subtract(3,'months').format('yyyy-MM-DD'),
-                            "placeholder": {
-                                "type": "plain_text",
-                                "text": "Select a date",
-                                "emoji": true
-                            },
-                            "action_id": "actionId-0"
-                        },
-
-                        {
-                            "type": "datepicker",
-                            "initial_date": moment().format('yyyy-MM-DD'),
-                            "placeholder": {
-                                "type": "plain_text",
-                                "text": "Select a date",
-                                "emoji": true
-                            },
-                            "action_id": "action_approve"
-                        },
-
-                    ]
-                },
-                {
-                    "type": "actions",
-                    "elements": [
-                        {
-                            "type": "button",
-                            "text": {
-                                "type": "plain_text",
-                                "text": "확인",
-                                "emoji": true
-                            },
-                            "value": "click_me_123",
-                            "action_id": "actionId-0"
-                        }
-                    ]
                 }
-
             ]
         }
-        console.log(body)
+
 
         fetch(new URL(`${req.body.response_url}`), {
             method: 'post',
@@ -167,7 +159,7 @@ class slackController {
 
         const response = JSON.parse(req.body.payload);
 
-        console.log(response.actions)
+        console.log('actions',response.actions)
 
         const user_id = response.user.id;
 
