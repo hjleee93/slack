@@ -4,7 +4,9 @@ import sequelize from 'sequelize';
 import fetch from "node-fetch"
 // import SlackUser from "../model/slackUser";
 
-import axios from "axios"
+import axios from "axios";
+
+import slackConfig from '../config/slackConfig';
 
 const qs = require('qs');
 const db = require('../model')
@@ -14,6 +16,7 @@ const WorkLog = db.workLog;
 const Op = db.sequelize.Op;
 
 class workTimeController {
+
     basicApi = async (req: any, res: any) => {
         console.log(req)
 
@@ -118,8 +121,6 @@ class workTimeController {
 
     openModal = async (trigger_id: any, text: string) => {
 
-        console.log(text)
-
         const modal = {
             "type": "modal",
             "title": {
@@ -144,9 +145,8 @@ class workTimeController {
                 }
             ]
         }
-        const token = 'xoxb-2409863706817-2407536745683-1dX5uFdB79UtEpba1k3b4zAB'
         const args = {
-            token: token,
+            token: slackConfig.token,
             trigger_id: trigger_id,
             view: JSON.stringify(modal)
         };
@@ -172,6 +172,8 @@ class workTimeController {
     //             res.status(500).send({message: err.message || 'Retrieve all slack failure.'});
     //         });
     // };
+
+
 
     openCalender = async (req: any, res: any) => {
 
@@ -290,7 +292,7 @@ class workTimeController {
                     },
                     {
                         "type": "plain_text",
-                        "text": log.start,
+                        "text": new Date(log.start).toLocaleTimeString(),
                         "emoji": true
                     }, {
                         "type": "plain_text",
@@ -299,7 +301,7 @@ class workTimeController {
                     },
                     {
                         "type": "plain_text",
-                        "text": log.end,
+                        "text": new Date(log.end).toLocaleTimeString(),
                         "emoji": true
                     },
                 ]
@@ -312,6 +314,7 @@ class workTimeController {
         //   
         //
         // }
+
         return result;
 
     }

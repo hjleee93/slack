@@ -5,7 +5,7 @@ const app = express();
 const { App } = require('@slack/bolt');
 const appSlack = new App({
     signingSecret: '564d1cf10f1afffb22dd6db94f6b6875',
-    token: 'xoxb-2409863706817-2407536745683-AfrEWCjdEw3ejwZxQtFwVEDr',
+    token: 'xoxb-2409863706817-2407536745683-biXMyzDqrQpbolKjYHH5W9D1',
 });
 
 (async () => {

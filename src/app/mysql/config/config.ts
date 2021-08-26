@@ -1,8 +1,8 @@
 module.exports = {
   host: "localhost",
-  username: "root",
-  password: "Paeki0913!",
-  db: "test",
+  username: "hj",
+  password: "Hjleee93@",
+  db: "slack_test",
   dialect: "mariadb",
 
 

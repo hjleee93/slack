@@ -21,7 +21,7 @@ db.sequelizeConfig = sequelizeConfig;
 
 db.slackUser = require("./slackUser")(sequelizeConfig, Sequelize);
 db.workLog = require('./workLog')(sequelizeConfig, Sequelize);
-db.bookingStatus = require('./bookingStatus')(sequelizeConfig, Sequelize);
+db.booking = require('./booking')(sequelizeConfig, Sequelize);
 db.participant = require('./participant')(sequelizeConfig, Sequelize);
 
 //출퇴근
@@ -29,9 +29,8 @@ db.slackUser.hasMany(db.workLog, {sourceKey: 'user_id', foreignKey: 'user_id'});
 db.workLog.belongsTo(db.slackUser, {foreignKey: 'user_id', targetKey: 'user_id'})
 
 //미팅
-db.bookingStatus.hasMany(db.participant,{sourceKey:'booking_id', foreignKey:'booking_id'});
-db.participant.belongsTo(db.bookingStatus, {foreignKey:'booking_id', targetKey:'booking_id'});
-
+db.booking.hasMany(db.participant, {sourceKey: 'id', foreignKey: 'booking_id'});//id , booking_id
+db.participant.belongsTo(db.booking, {foreignKey: 'booking_id', targetKey: 'id'}); // booking_id, id
 
 module.exports = db;
 
